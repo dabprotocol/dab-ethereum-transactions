@@ -1,0 +1,24 @@
+{
+  "name": "dab-ethereum-transactions",
+  "version": "0.0.1",
+  "description": "pull transactions from ethereum network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dabprotocol/dab-ethereum-transactions.git"
+  },
+  "author": "DAVID ZHAO, DAB.ONE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dabprotocol/dab-ethereum-transactions/issues"
+  },
+  "homepage": "https://github.com/dabprotocol/dab-ethereum-transactions#readme",
+  "dependencies": {
+    "async": "^2.6.0",
+    "mongodb": "^3.0.1",
+    "web3": "^1.0.0-beta.29"
+  }
+}
