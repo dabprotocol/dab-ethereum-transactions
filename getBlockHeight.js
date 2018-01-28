@@ -13,7 +13,6 @@ MongoClient.connect(config.mongodbConnectionString, function(err, client) {
                 if (sync === true) {
                     web3.reset(true);
                 } else if (sync) {
-                    console.log('.');
                     let currentBlockHeight = sync.currentBlock;
                     db.collection('info').updateOne(
                         {type: 'blockInfo'},

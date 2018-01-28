@@ -22,8 +22,6 @@ MongoClient.connect(config.mongodbConnectionString, function(err, client) {
                     {blockHeight: current},
                     {$set : result},
                     {upsert: true}, () => {
-                        console.log('.');
-
                         db.collection('info').updateOne(
                             {type: 'blockInfo'},
                             {$set : {currentProcessedBlockHeight: current}},
