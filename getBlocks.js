@@ -16,14 +16,14 @@ MongoClient.connect(config.mongodbConnectionString, function(err, client) {
             if (current === max + 1) {
                 return ;
             }
-            web3.eth.getBlock(1, (error, result) => {
+            web3.eth.getBlock(currentProcessedBlockHeight, (error, result) => {
 
                 db.collection('blocks').updateOne(
                     {blockHeight: current},
                     {$set : result},
                     {upsert: true}, () => {
                         console.log('.');
-                        
+
                         db.collection('info').updateOne(
                             {type: 'blockInfo'},
                             {$set : {currentProcessedBlockHeight: current}},
