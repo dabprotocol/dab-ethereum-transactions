@@ -6,3 +6,7 @@ To use this you need to create a config.json in config directory
     'dbName': '', //string
     'ethereumRPC': '' //ethereum RPC
 }
+
+=====
+
+$ geth --rpc --ws --wsorigins="*" --wsapi "db,eth,net,ssh,miner,web3,personal,admin" --syncmode "full" --datadir "/data/ethereum"
