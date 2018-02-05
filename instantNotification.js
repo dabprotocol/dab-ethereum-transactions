@@ -1,18 +1,19 @@
 const Web3 = require('web3');
-const MongoClient = require('mongodb').MongoClient;
-
 const config = require('./config/config.json');
-const web3 = new Web3(new Web3.providers.WebsocketProvider(config.ethereumWS));
 
-web3.eth
+const websocketConnection = new Web3(new Web3.providers.WebsocketProvider(config.ethereumWS));
+const web3 = new Web3(new Web3.providers.HttpProvider(config.ethereumRPC));
+
+websocketConnection.eth
     .subscribe('pendingTransactions', function(error, result){})
-    .on("data", function(trxData){
-        console.log("T:");
-        console.log(trxData);
-    });
-
-web3.eth
-    .subscribe('newBlockHeaders', function(error, result){})
-    .on("data", function(result){
-        console.log(result);
+    .on("data", function(tx){
+        web3.eth.getTransaction(tx, (error, result) => {
+            if (result.from && result.to) {
+                console.log("----");
+                console.log("Tx Id: " + tx);
+                console.log("From: " + result.from);
+                console.log("To: " + result.to);
+                console.log("----");
+            }
+        });
     });
