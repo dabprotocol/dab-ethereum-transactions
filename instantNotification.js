@@ -7,12 +7,24 @@ const web3 = new Web3(new Web3.providers.HttpProvider(config.ethereumRPC));
 websocketConnection.eth
     .subscribe('pendingTransactions', function(error, result){})
     .on("data", function(tx){
-        web3.eth.getTransaction(tx, (error, result) => {
-            if (result.from && result.to) {
+        let transaction = web3.eth.getTransaction(tx);
+        transaction.then(result => {
+            if (result && result.from && result.to) {
                 console.log("----");
                 console.log("Tx Id: " + tx);
+                let to = result.to;
+
+                if (result.input === '0x') {
+                    console.log("TransferType: ", "Direct Transfer ETH");
+                } else {
+                    console.log("TransferType: ", "Contract Transfer");
+                    to = 'CONTRACT';
+                }
+
                 console.log("From: " + result.from);
-                console.log("To: " + result.to);
+                console.log("To: " + to);
+
+
                 console.log("----");
             }
         });
